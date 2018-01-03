@@ -14,5 +14,6 @@ namespace BSRBanking
     public partial class App : Application
     {
         //changes
+        //changes
     }
 }
