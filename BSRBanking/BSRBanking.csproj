@@ -80,16 +80,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Model\AccountActionModel.cs" />
     <Compile Include="Model\BankAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Utils\Computing.cs" />
     <Compile Include="Utils\FrameNavigationService.cs" />
     <Compile Include="Utils\IFrameNavigationService.cs" />
     <Compile Include="ViewModel\BankAccountViewModel.cs" />
+    <Compile Include="ViewModel\InternalTransferViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Views\BankAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InternalTransferPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,6 +113,9 @@
     </Compile>
     <Compile Include="Views\BankAccountPage.xaml.cs">
       <DependentUpon>BankAccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InternalTransferPage.xaml.cs">
+      <DependentUpon>InternalTransferPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -149,17 +158,12 @@
     <None Include="Connected Services\Service\BankingService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Service\BSRBanking.Service.AccountActionListDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Service\BSRBanking.Service.BankResultDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Service\BSRBanking.Service.UserResultDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\Service\Service.wsdl" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BSRBankingDataContract.Base.AccountActionListDto.datasource" />
+    <None Include="Properties\DataSources\BSRBankingDataContract.Base.BankResultDto.datasource" />
+    <None Include="Properties\DataSources\BSRBankingDataContract.Base.BoolResultDto.datasource" />
+    <None Include="Properties\DataSources\BSRBankingDataContract.Base.UserResultDto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -189,6 +193,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BSRBankingDataContract\BSRBankingDataContract.csproj">
+      <Project>{3288a589-a04e-4eb8-8c22-d471d0d087f2}</Project>
+      <Name>BSRBankingDataContract</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

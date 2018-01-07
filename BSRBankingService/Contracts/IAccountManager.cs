@@ -1,4 +1,5 @@
 ﻿using BSRBankingDataContract.Base;
+using BSRBankingDataContract.Dtos;
 using System.ServiceModel;
 
 namespace BSRBankingService.Contracts
@@ -12,6 +13,7 @@ namespace BSRBankingService.Contracts
         [OperationContract]
         BankResultDto GetBankAccount(int userId);
 
-
+        [OperationContract]
+        BoolResultDto Transfer(AccountActionDto action);
     }
 }

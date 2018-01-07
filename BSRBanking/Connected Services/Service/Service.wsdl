@@ -21,6 +21,12 @@
   <wsdl:message name="IAccountManager_GetBankAccount_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetBankAccountResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountManager_Transfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Transfer" />
+  </wsdl:message>
+  <wsdl:message name="IAccountManager_Transfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransferResponse" />
+  </wsdl:message>
   <wsdl:message name="IAuthorization_AuthenticateUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AuthenticateUser" />
   </wsdl:message>
@@ -35,6 +41,10 @@
     <wsdl:operation name="GetBankAccount">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountManager/GetBankAccount" message="tns:IAccountManager_GetBankAccount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountManager/GetBankAccountResponse" message="tns:IAccountManager_GetBankAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Transfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountManager/Transfer" message="tns:IAccountManager_Transfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountManager/TransferResponse" message="tns:IAccountManager_Transfer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAuthorization">
@@ -56,6 +66,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetBankAccount">
       <soap:operation soapAction="http://tempuri.org/IAccountManager/GetBankAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Transfer">
+      <soap:operation soapAction="http://tempuri.org/IAccountManager/Transfer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

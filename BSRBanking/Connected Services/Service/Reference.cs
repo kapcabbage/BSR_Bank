@@ -9,622 +9,29 @@
 //------------------------------------------------------------------------------
 
 namespace BSRBanking.Service {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BSRBanking.Service.AccountActionListDto))]
-    public partial class BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.AccountActionDto[] DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.OperationResult ResultField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.AccountActionDto[] Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DataField, value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.OperationResult Result {
-            get {
-                return this.ResultField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ResultField, value) != true)) {
-                    this.ResultField = value;
-                    this.RaisePropertyChanged("Result");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationResult", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class OperationResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExceptionMessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.eOperationStatus StatusField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ExceptionMessage {
-            get {
-                return this.ExceptionMessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExceptionMessageField, value) != true)) {
-                    this.ExceptionMessageField = value;
-                    this.RaisePropertyChanged("ExceptionMessage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.eOperationStatus Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountActionListDto", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class AccountActionListDto : BSRBanking.Service.BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountActionDto", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos")]
-    [System.SerializableAttribute()]
-    public partial class AccountActionDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AccountActionIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.eActionType ActionTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DestinationNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SourceNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AccountActionId {
-            get {
-                return this.AccountActionIdField;
-            }
-            set {
-                if ((this.AccountActionIdField.Equals(value) != true)) {
-                    this.AccountActionIdField = value;
-                    this.RaisePropertyChanged("AccountActionId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.eActionType ActionType {
-            get {
-                return this.ActionTypeField;
-            }
-            set {
-                if ((this.ActionTypeField.Equals(value) != true)) {
-                    this.ActionTypeField = value;
-                    this.RaisePropertyChanged("ActionType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DestinationName {
-            get {
-                return this.DestinationNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DestinationNameField, value) != true)) {
-                    this.DestinationNameField = value;
-                    this.RaisePropertyChanged("DestinationName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SourceName {
-            get {
-                return this.SourceNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SourceNameField, value) != true)) {
-                    this.SourceNameField = value;
-                    this.RaisePropertyChanged("SourceName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="eActionType", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Enums")]
-    public enum eActionType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SelfTransfer = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        SelfWithdrawal = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        InternalTransfer = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ExternalTranser = 4,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="eOperationStatus", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Enums")]
-    public enum eOperationStatus : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Success = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AccessDenied = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        GeneralError = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotDefined = 4,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BaseResultDtoOfBankAccountDtoCBzvyXYT", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BSRBanking.Service.BankResultDto))]
-    public partial class BaseResultDtoOfBankAccountDtoCBzvyXYT : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.BankAccountDto DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.OperationResult ResultField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.BankAccountDto Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DataField, value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.OperationResult Result {
-            get {
-                return this.ResultField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ResultField, value) != true)) {
-                    this.ResultField = value;
-                    this.RaisePropertyChanged("Result");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BankAccountDto", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos")]
-    [System.SerializableAttribute()]
-    public partial class BankAccountDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int BalanceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int BankAccountIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string BankAccountNumberField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Balance {
-            get {
-                return this.BalanceField;
-            }
-            set {
-                if ((this.BalanceField.Equals(value) != true)) {
-                    this.BalanceField = value;
-                    this.RaisePropertyChanged("Balance");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int BankAccountId {
-            get {
-                return this.BankAccountIdField;
-            }
-            set {
-                if ((this.BankAccountIdField.Equals(value) != true)) {
-                    this.BankAccountIdField = value;
-                    this.RaisePropertyChanged("BankAccountId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BankAccountNumber {
-            get {
-                return this.BankAccountNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BankAccountNumberField, value) != true)) {
-                    this.BankAccountNumberField = value;
-                    this.RaisePropertyChanged("BankAccountNumber");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BankResultDto", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BankResultDto : BSRBanking.Service.BaseResultDtoOfBankAccountDtoCBzvyXYT {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BaseResultDtoOfUserDtoCBzvyXYT", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(BSRBanking.Service.UserResultDto))]
-    public partial class BaseResultDtoOfUserDtoCBzvyXYT : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.UserDto DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private BSRBanking.Service.OperationResult ResultField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.UserDto Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DataField, value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public BSRBanking.Service.OperationResult Result {
-            get {
-                return this.ResultField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ResultField, value) != true)) {
-                    this.ResultField = value;
-                    this.RaisePropertyChanged("Result");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserDto", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos")]
-    [System.SerializableAttribute()]
-    public partial class UserDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FirstNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LastNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FirstName {
-            get {
-                return this.FirstNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
-                    this.FirstNameField = value;
-                    this.RaisePropertyChanged("FirstName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LastName {
-            get {
-                return this.LastNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
-                    this.LastNameField = value;
-                    this.RaisePropertyChanged("LastName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserName {
-            get {
-                return this.UserNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
-                    this.UserNameField = value;
-                    this.RaisePropertyChanged("UserName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserResultDto", Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class UserResultDto : BSRBanking.Service.BaseResultDtoOfUserDtoCBzvyXYT {
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Service.IAccountManager")]
     public interface IAccountManager {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetHistory", ReplyAction="http://tempuri.org/IAccountManager/GetHistoryResponse")]
-        BSRBanking.Service.AccountActionListDto GetHistory(int bankAccountId);
+        BSRBankingDataContract.Base.AccountActionListDto GetHistory(int bankAccountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetHistory", ReplyAction="http://tempuri.org/IAccountManager/GetHistoryResponse")]
-        System.Threading.Tasks.Task<BSRBanking.Service.AccountActionListDto> GetHistoryAsync(int bankAccountId);
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.AccountActionListDto> GetHistoryAsync(int bankAccountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetBankAccount", ReplyAction="http://tempuri.org/IAccountManager/GetBankAccountResponse")]
-        BSRBanking.Service.BankResultDto GetBankAccount(int userId);
+        BSRBankingDataContract.Base.BankResultDto GetBankAccount(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetBankAccount", ReplyAction="http://tempuri.org/IAccountManager/GetBankAccountResponse")]
-        System.Threading.Tasks.Task<BSRBanking.Service.BankResultDto> GetBankAccountAsync(int userId);
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.BankResultDto> GetBankAccountAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Transfer", ReplyAction="http://tempuri.org/IAccountManager/TransferResponse")]
+        BSRBankingDataContract.Base.BoolResultDto Transfer(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Transfer", ReplyAction="http://tempuri.org/IAccountManager/TransferResponse")]
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> TransferAsync(BSRBankingDataContract.Dtos.AccountActionDto action);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -654,20 +61,28 @@ namespace BSRBanking.Service {
                 base(binding, remoteAddress) {
         }
         
-        public BSRBanking.Service.AccountActionListDto GetHistory(int bankAccountId) {
+        public BSRBankingDataContract.Base.AccountActionListDto GetHistory(int bankAccountId) {
             return base.Channel.GetHistory(bankAccountId);
         }
         
-        public System.Threading.Tasks.Task<BSRBanking.Service.AccountActionListDto> GetHistoryAsync(int bankAccountId) {
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.AccountActionListDto> GetHistoryAsync(int bankAccountId) {
             return base.Channel.GetHistoryAsync(bankAccountId);
         }
         
-        public BSRBanking.Service.BankResultDto GetBankAccount(int userId) {
+        public BSRBankingDataContract.Base.BankResultDto GetBankAccount(int userId) {
             return base.Channel.GetBankAccount(userId);
         }
         
-        public System.Threading.Tasks.Task<BSRBanking.Service.BankResultDto> GetBankAccountAsync(int userId) {
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.BankResultDto> GetBankAccountAsync(int userId) {
             return base.Channel.GetBankAccountAsync(userId);
+        }
+        
+        public BSRBankingDataContract.Base.BoolResultDto Transfer(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.Transfer(action);
+        }
+        
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> TransferAsync(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.TransferAsync(action);
         }
     }
     
@@ -676,10 +91,10 @@ namespace BSRBanking.Service {
     public interface IAuthorization {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/AuthenticateUser", ReplyAction="http://tempuri.org/IAuthorization/AuthenticateUserResponse")]
-        BSRBanking.Service.UserResultDto AuthenticateUser(string userName, string passwordHash);
+        BSRBankingDataContract.Base.UserResultDto AuthenticateUser(string userName, string passwordHash);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorization/AuthenticateUser", ReplyAction="http://tempuri.org/IAuthorization/AuthenticateUserResponse")]
-        System.Threading.Tasks.Task<BSRBanking.Service.UserResultDto> AuthenticateUserAsync(string userName, string passwordHash);
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.UserResultDto> AuthenticateUserAsync(string userName, string passwordHash);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -709,11 +124,11 @@ namespace BSRBanking.Service {
                 base(binding, remoteAddress) {
         }
         
-        public BSRBanking.Service.UserResultDto AuthenticateUser(string userName, string passwordHash) {
+        public BSRBankingDataContract.Base.UserResultDto AuthenticateUser(string userName, string passwordHash) {
             return base.Channel.AuthenticateUser(userName, passwordHash);
         }
         
-        public System.Threading.Tasks.Task<BSRBanking.Service.UserResultDto> AuthenticateUserAsync(string userName, string passwordHash) {
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.UserResultDto> AuthenticateUserAsync(string userName, string passwordHash) {
             return base.Channel.AuthenticateUserAsync(userName, passwordHash);
         }
     }

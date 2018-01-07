@@ -7,9 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300">
     <Grid DataContext="{Binding Login, Source={StaticResource Locator}}">
-        <PasswordBox Name="txtPassword" Margin="56,154,60,0" Width="150" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <TextBox Height="23" Width="150" Margin="56,110,60,0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{Binding UserName}"/>
-        <Button Content="Login" Margin="112,203,113,0" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding loginCommand}" CommandParameter="{Binding ElementName=txtPassword}"/>
+        <PasswordBox Name="txtPassword" Margin="56,154,60,0" Width="150" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="Login" Margin="107,203,115,0" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=txtPassword}" Width="78"/>
 
     </Grid>
 </Page>

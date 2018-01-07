@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BSRBanking.Model;
-using BSRBanking.Service;
+using BSRBankingDataContract.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,10 @@ namespace BSRBanking
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<UserModel, UserDto>();
                 cfg.CreateMap<UserDto, UserModel>();
+                cfg.CreateMap<BankAccountModel, BankAccountDto>();
+                cfg.CreateMap<BankAccountDto, BankAccountModel>();
+                cfg.CreateMap<AccountActionDto, AccountActionModel>();
+                cfg.CreateMap<AccountActionModel, AccountActionDto>();
             });
         }
     }

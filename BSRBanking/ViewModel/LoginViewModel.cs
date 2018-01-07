@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BSRBanking.Model;
 using BSRBanking.Utils;
+using BSRBankingDataContract.Enums;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -18,7 +19,7 @@ namespace BSRBanking.ViewModel
     {
         private string _userName;
 
-        public ICommand loginCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
  
 
         public string UserName
@@ -38,7 +39,7 @@ namespace BSRBanking.ViewModel
         public LoginViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            loginCommand = new RelayCommand<object>(Login);
+            LoginCommand = new RelayCommand<object>(Login);
         }
 
         public void Login(object parameter)
@@ -48,7 +49,7 @@ namespace BSRBanking.ViewModel
                 var passwordBox = parameter as PasswordBox;
                 var passwordHash = Computing.Sha256(passwordBox.Password); 
                 var result = client.AuthenticateUser(this._userName, passwordHash);
-                if(result.Result.Status == Service.eOperationStatus.Success)
+                if(result.Result.Status == eOperationStatus.Success)
                 {
                     var userModel = Mapper.Map<UserModel>(result.Data);
                     _navigationService.NavigateTo("BankPage", userModel);

@@ -11,6 +11,8 @@ namespace BSRBankingDataContract.Dtos
         public eActionType ActionType {get;set;}
         public string DestinationName { get; set; }
         public string SourceName { get; set; }
+        public string DestinationBankNumber { get; set; }
+        public string SourceBankNumber { get; set; }
         public string Title { get; set; } 
         public int Amount { get; set; }
     }

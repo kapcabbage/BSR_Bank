@@ -17,10 +17,13 @@
         <Label Content="Historia" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Height="26" Width="51"/>
         <Label Content="Saldo: " HorizontalAlignment="Left" Margin="281,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="43"/>
         <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="324,29,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="48" Width="166" FontSize="30" FontWeight="Bold"/>
+        <Label Content="{Binding BankIdNumber}" HorizontalAlignment="Left" Margin="233,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257" FontSize="16" FontWeight="Bold"/>
+        <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="233,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257"  FontWeight="Bold"/>
         <Button Content="Wpłata własna" HorizontalAlignment="Left" Margin="233,270,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
         <Button Content="Wypłata własna" HorizontalAlignment="Left" Margin="233,245,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
-        <Button Content="Zleć przelew wewnętrzny" HorizontalAlignment="Left" Margin="233,195,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
-        <Button Content="Zleć przelew zewnętrzny" HorizontalAlignment="Left" Margin="233,220,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
+        <Button Content="Zleć przelew wewnętrzny" HorizontalAlignment="Left" Margin="233,195,0,0" VerticalAlignment="Top" Width="257" Height="20" Command="{Binding InternalTransferCommand}"/>
+        <Button Content="Zleć przelew zewnętrzny" HorizontalAlignment="Left" Margin="233,220,0,0" VerticalAlignment="Top" Width="257" Height="20" />
+        
 
     </Grid>
 </Page>

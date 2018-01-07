@@ -12,7 +12,9 @@
       <xs:element minOccurs="0" name="AccountActionId" type="xs:int" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Enums" minOccurs="0" name="ActionType" type="q1:eActionType" />
       <xs:element minOccurs="0" name="Amount" type="xs:int" />
+      <xs:element minOccurs="0" name="DestinationBankNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DestinationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceBankNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>

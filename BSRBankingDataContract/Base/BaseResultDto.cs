@@ -69,4 +69,10 @@ namespace BSRBankingDataContract.Base
     {
 
     }
+    
+    [DataContract(IsReference = true)]
+    public class BoolResultDto : BaseResultDto<bool>
+    {
+
+    }
 }

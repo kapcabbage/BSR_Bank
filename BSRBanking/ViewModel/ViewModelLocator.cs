@@ -48,6 +48,7 @@ namespace BSRBanking.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<BankAccountViewModel>();
+            SimpleIoc.Default.Register<InternalTransferViewModel>();
         }
 
         public MainViewModel Main
@@ -73,7 +74,15 @@ namespace BSRBanking.ViewModel
                 return ServiceLocator.Current.GetInstance<BankAccountViewModel>();
             }
         }
-        
+
+        public InternalTransferViewModel InternalTransfer
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InternalTransferViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
@@ -84,7 +93,7 @@ namespace BSRBanking.ViewModel
             var navigationService = new FrameNavigationService();
             navigationService.Configure("LoginPage", new Uri("../Views/LoginPage.xaml", UriKind.Relative));
             navigationService.Configure("BankPage", new Uri("../Views/BankAccountPage.xaml", UriKind.Relative));
-
+            navigationService.Configure("InternalTransferPage", new Uri("../Views/InternalTransferPage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }

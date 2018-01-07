@@ -60,6 +60,30 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="BaseResultDtoOfBankAccountDtoCBzvyXYT" nillable="true" type="tns:BaseResultDtoOfBankAccountDtoCBzvyXYT" />
+  <xs:complexType name="BoolResultDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResultDtoOfboolean">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BoolResultDto" nillable="true" type="tns:BoolResultDto" />
+  <xs:complexType name="BaseResultDtoOfboolean">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="BaseResultDtoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="boolean" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Data" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:OperationResult" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BaseResultDtoOfboolean" nillable="true" type="tns:BaseResultDtoOfboolean" />
   <xs:complexType name="UserResultDto">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResultDtoOfUserDtoCBzvyXYT">
