@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:64579/BankingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" />
+  <xs:import schemaLocation="http://localhost:64579/BankingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:64579/BankingService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Enums" />
+  <xs:complexType name="AccountActionListDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AccountActionListDto" nillable="true" type="tns:AccountActionListDto" />
+  <xs:complexType name="BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="BaseResultDtoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfAccountActionDto" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" minOccurs="0" name="Data" nillable="true" type="q1:ArrayOfAccountActionDto" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:OperationResult" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT" nillable="true" type="tns:BaseResultDtoOfArrayOfAccountActionDtoCBzvyXYT" />
+  <xs:complexType name="OperationResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExceptionMessage" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Enums" minOccurs="0" name="Status" type="q2:eOperationStatus" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="OperationResult" nillable="true" type="tns:OperationResult" />
+  <xs:complexType name="BankResultDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResultDtoOfBankAccountDtoCBzvyXYT">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankResultDto" nillable="true" type="tns:BankResultDto" />
+  <xs:complexType name="BaseResultDtoOfBankAccountDtoCBzvyXYT">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="BaseResultDtoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="BankAccountDto" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" minOccurs="0" name="Data" nillable="true" type="q3:BankAccountDto" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:OperationResult" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BaseResultDtoOfBankAccountDtoCBzvyXYT" nillable="true" type="tns:BaseResultDtoOfBankAccountDtoCBzvyXYT" />
+  <xs:complexType name="UserResultDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResultDtoOfUserDtoCBzvyXYT">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserResultDto" nillable="true" type="tns:UserResultDto" />
+  <xs:complexType name="BaseResultDtoOfUserDtoCBzvyXYT">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="BaseResultDtoOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="UserDto" Namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" minOccurs="0" name="Data" nillable="true" type="q4:UserDto" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:OperationResult" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BaseResultDtoOfUserDtoCBzvyXYT" nillable="true" type="tns:BaseResultDtoOfUserDtoCBzvyXYT" />
+</xs:schema>

@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="BSRBankingService.BankingService.Services.Service"%>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="BSRBankingService.Services.Service"%>

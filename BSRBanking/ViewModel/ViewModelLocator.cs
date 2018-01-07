@@ -12,9 +12,11 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using BSRBanking.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using System;
 
 namespace BSRBanking.ViewModel
 {
@@ -30,6 +32,7 @@ namespace BSRBanking.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SetupNavigation();
 
             ////if (ViewModelBase.IsInDesignModeStatic)
             ////{
@@ -43,6 +46,8 @@ namespace BSRBanking.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<BankAccountViewModel>();
         }
 
         public MainViewModel Main
@@ -52,10 +57,36 @@ namespace BSRBanking.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public LoginViewModel Login
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            }
+        }
+
+        public BankAccountViewModel Bank
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<BankAccountViewModel>();
+            }
+        }
         
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
+        }
+
+        private static void SetupNavigation()
+        {
+            var navigationService = new FrameNavigationService();
+            navigationService.Configure("LoginPage", new Uri("../Views/LoginPage.xaml", UriKind.Relative));
+            navigationService.Configure("BankPage", new Uri("../Views/BankAccountPage.xaml", UriKind.Relative));
+
+
+            SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
     }
 }

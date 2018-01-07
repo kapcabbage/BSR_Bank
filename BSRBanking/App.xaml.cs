@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+
 namespace BSRBanking
 {
     /// <summary>
@@ -13,8 +14,9 @@ namespace BSRBanking
     /// </summary>
     public partial class App : Application
     {
-        //changes
-        //changes
-
+        public App()
+        {
+            AutoMapperConfig.Init();
+        }
     }
 }

@@ -23,6 +23,12 @@ namespace BSRBankingDataContract.Base
             Result = new OperationResult();
         }
 
+        public void SetSuccess(T data)
+        {
+            Data = data;
+            Result.Status = eOperationStatus.Success;
+        }
+
         public void SetErrors(Exception exception)
         {
             Result.SetErrors(exception);
@@ -33,12 +39,33 @@ namespace BSRBankingDataContract.Base
             Result.Status = status;
         }
 
+        public bool Success()
+        {
+            return Result.Status == eOperationStatus.Success;
+        }
+
+        public bool AccessDenied()
+        {
+            return Result.Status == eOperationStatus.AccessDenied;
+        }
 
 
     }
 
     [DataContract(IsReference = true)]
     public class UserResultDto : BaseResultDto<UserDto>
+    {
+
+    }
+
+    [DataContract(IsReference = true)]
+    public class AccountActionListDto : BaseResultDto<List<AccountActionDto>>
+    {
+
+    }
+
+    [DataContract(IsReference = true)]
+    public class BankResultDto : BaseResultDto<BankAccountDto>
     {
 
     }

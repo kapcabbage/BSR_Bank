@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BSRBanking"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="{Binding Title}" 
+        Height="350" Width="550"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        
+        <Frame Name="_mainFrame" Source="Views/LoginPage.xaml" Margin="10" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

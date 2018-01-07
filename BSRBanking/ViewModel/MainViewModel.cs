@@ -16,11 +16,12 @@ namespace BSRBanking.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+
+        public string Title { get; set; }
+
         public MainViewModel()
         {
+            Title = "BSRBanking";
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -30,5 +31,7 @@ namespace BSRBanking.ViewModel
             ////    // Code runs "for real"
             ////}
         }
+
+        
     }
 }
