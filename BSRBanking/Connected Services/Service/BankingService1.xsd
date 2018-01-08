@@ -12,7 +12,7 @@
   <xs:element name="GetHistoryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="GetHistoryResult" nillable="true" type="q1:AccountActionListDto" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="GetHistoryResult" nillable="true" type="q1:HistoryListResultDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

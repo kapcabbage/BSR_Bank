@@ -49,6 +49,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -82,6 +85,7 @@
     </Compile>
     <Compile Include="Model\AccountActionModel.cs" />
     <Compile Include="Model\BankAccountModel.cs" />
+    <Compile Include="Model\HistoryEntryModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Utils\Computing.cs" />
     <Compile Include="Utils\FrameNavigationService.cs" />
@@ -163,6 +167,7 @@
     <None Include="Properties\DataSources\BSRBankingDataContract.Base.AccountActionListDto.datasource" />
     <None Include="Properties\DataSources\BSRBankingDataContract.Base.BankResultDto.datasource" />
     <None Include="Properties\DataSources\BSRBankingDataContract.Base.BoolResultDto.datasource" />
+    <None Include="Properties\DataSources\BSRBankingDataContract.Base.HistoryListResultDto.datasource" />
     <None Include="Properties\DataSources\BSRBankingDataContract.Base.UserResultDto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

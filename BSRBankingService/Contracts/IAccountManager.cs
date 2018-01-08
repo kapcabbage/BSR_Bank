@@ -8,7 +8,7 @@ namespace BSRBankingService.Contracts
     public interface IAccountManager
     {
         [OperationContract]
-        AccountActionListDto GetHistory(int bankAccountId);
+        HistoryListResultDto GetHistory(int bankAccountId);
 
         [OperationContract]
         BankResultDto GetBankAccount(int userId);

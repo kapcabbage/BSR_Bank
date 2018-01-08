@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:64579/BankingService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Enums" />
-  <xs:complexType name="ArrayOfAccountActionDto">
+  <xs:complexType name="ArrayOfHistoryEntryDto">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="AccountActionDto" nillable="true" type="tns:AccountActionDto" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HistoryEntryDto" nillable="true" type="tns:HistoryEntryDto" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfAccountActionDto" nillable="true" type="tns:ArrayOfAccountActionDto" />
+  <xs:element name="ArrayOfHistoryEntryDto" nillable="true" type="tns:ArrayOfHistoryEntryDto" />
+  <xs:complexType name="HistoryEntryDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:int" />
+      <xs:element minOccurs="0" name="BalanceAfter" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DestinationBankNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DestinationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceBankNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HistoryEntryDto" nillable="true" type="tns:HistoryEntryDto" />
+  <xs:complexType name="BankAccountDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Balance" type="xs:int" />
+      <xs:element minOccurs="0" name="BankAccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="BankAccountNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankAccountDto" nillable="true" type="tns:BankAccountDto" />
   <xs:complexType name="AccountActionDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccountActionId" type="xs:int" />
@@ -20,14 +42,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AccountActionDto" nillable="true" type="tns:AccountActionDto" />
-  <xs:complexType name="BankAccountDto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Balance" type="xs:int" />
-      <xs:element minOccurs="0" name="BankAccountId" type="xs:int" />
-      <xs:element minOccurs="0" name="BankAccountNumber" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="BankAccountDto" nillable="true" type="tns:BankAccountDto" />
   <xs:complexType name="UserDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />

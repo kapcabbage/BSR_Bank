@@ -27,7 +27,6 @@ namespace BSRBanking.Model
             SourceBankNumber = sourceNum;
             Title = title;
             Amount = amount;
-
         }
     }
 }

@@ -10,11 +10,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSRBanking", "BSRBanking\BS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSRBankingService", "BSRBankingService\BSRBankingService.csproj", "{E189EF4F-C252-4C45-9E93-7DEDE2FA0715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSRBankingData", "BSRBankingData\BSRBankingData.csproj", "{905B327F-38CE-4E88-880C-231BC1B892BC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSRBankingServiceHost", "BSRBankingServiceHost\BSRBankingServiceHost.csproj", "{6DA3594B-F3B7-427A-BF1A-3C77BFA8881B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSRBankingDataContract", "BSRBankingDataContract\BSRBankingDataContract.csproj", "{3288A589-A04E-4EB8-8C22-D471D0D087F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSRBankingRestService", "BSRBankingRestService\BSRBankingRestService.csproj", "{24A6B5B6-C689-4DB0-A549-BE99DB5F2859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSRBankingDataAccess", "BSRBankingDataAccess\BSRBankingDataAccess.csproj", "{2D70536A-536B-4E52-BF7E-0130C0F816F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +32,6 @@ Global
 		{E189EF4F-C252-4C45-9E93-7DEDE2FA0715}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E189EF4F-C252-4C45-9E93-7DEDE2FA0715}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E189EF4F-C252-4C45-9E93-7DEDE2FA0715}.Release|Any CPU.Build.0 = Release|Any CPU
-		{905B327F-38CE-4E88-880C-231BC1B892BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{905B327F-38CE-4E88-880C-231BC1B892BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{905B327F-38CE-4E88-880C-231BC1B892BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{905B327F-38CE-4E88-880C-231BC1B892BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6DA3594B-F3B7-427A-BF1A-3C77BFA8881B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6DA3594B-F3B7-427A-BF1A-3C77BFA8881B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA3594B-F3B7-427A-BF1A-3C77BFA8881B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,6 +40,14 @@ Global
 		{3288A589-A04E-4EB8-8C22-D471D0D087F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3288A589-A04E-4EB8-8C22-D471D0D087F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3288A589-A04E-4EB8-8C22-D471D0D087F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A6B5B6-C689-4DB0-A549-BE99DB5F2859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A6B5B6-C689-4DB0-A549-BE99DB5F2859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A6B5B6-C689-4DB0-A549-BE99DB5F2859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A6B5B6-C689-4DB0-A549-BE99DB5F2859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D70536A-536B-4E52-BF7E-0130C0F816F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D70536A-536B-4E52-BF7E-0130C0F816F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D70536A-536B-4E52-BF7E-0130C0F816F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D70536A-536B-4E52-BF7E-0130C0F816F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

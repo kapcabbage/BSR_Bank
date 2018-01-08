@@ -26,5 +26,11 @@ namespace BSRBankingDataContract.Base
             ExceptionMessage = exception.Message;
             Status = eOperationStatus.GeneralError;
         }
+
+        public void SetErrors(String message)
+        {
+            ExceptionMessage = message;
+            Status = eOperationStatus.GeneralError;
+        }
     }
 }

@@ -38,6 +38,9 @@
       <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -61,6 +64,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\BSRBankingDataAccess\BSRBankingDataAccess.csproj">
+      <Project>{2d70536a-536b-4e52-bf7e-0130c0f816f3}</Project>
+      <Name>BSRBankingDataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BSRBankingDataContract\BSRBankingDataContract.csproj">
       <Project>{3288a589-a04e-4eb8-8c22-d471d0d087f2}</Project>
       <Name>BSRBankingDataContract</Name>

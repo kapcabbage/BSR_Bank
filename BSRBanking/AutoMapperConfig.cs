@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using BSRBanking.Model;
 using BSRBankingDataContract.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BSRBanking
 {
@@ -20,6 +16,10 @@ namespace BSRBanking
                 cfg.CreateMap<BankAccountDto, BankAccountModel>();
                 cfg.CreateMap<AccountActionDto, AccountActionModel>();
                 cfg.CreateMap<AccountActionModel, AccountActionDto>();
+                cfg.CreateMap<HistoryEntryDto, HistoryEntryModel>()
+                .ForMember(dest=>dest.Amount,opts=>opts.MapFrom(src=>(double)src.Amount/100))
+                .ForMember(dest=>dest.BalanceAfter, opts=>opts.MapFrom(src=>(double)src.BalanceAfter/100));
+                cfg.CreateMap<HistoryEntryModel, HistoryEntryDto>();
             });
         }
     }

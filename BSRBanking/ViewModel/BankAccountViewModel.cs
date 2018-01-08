@@ -4,6 +4,8 @@ using BSRBanking.Utils;
 using BSRBankingDataContract.Enums;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace BSRBanking.ViewModel
@@ -16,6 +18,7 @@ namespace BSRBanking.ViewModel
         private IFrameNavigationService _navigationService;
 
         public ICommand InternalTransferCommand { get; set; } 
+        public ObservableCollection<HistoryEntryModel> History { get; set; }
 
         public string OwnerName
         {
@@ -46,7 +49,9 @@ namespace BSRBanking.ViewModel
             _navigationService = navigationService;
             _userModel = _navigationService.Parameter as UserModel;
             InternalTransferCommand = new RelayCommand(callInternalTransfer);
+            History = new ObservableCollection<HistoryEntryModel>();
             getAccount(_userModel.UserId);
+            getHistory(_accountModel.BankAccountId);
            
         }
 
@@ -60,9 +65,25 @@ namespace BSRBanking.ViewModel
             using (var client = new Service.AccountManagerClient())
             {
                 var result = client.GetBankAccount(userId);
-                if (result.Result.Status == eOperationStatus.Success)
+                if (result.Success())
                 {
                     _accountModel = Mapper.Map<BankAccountModel>(result.Data);
+                }
+            }
+        }
+
+        private void getHistory(int bankId)
+        {
+            using(var client = new Service.AccountManagerClient())
+            {
+                var result = client.GetHistory(bankId);
+                if (result.Success())
+                {
+                    var historyList = Mapper.Map<List<HistoryEntryModel>>(result.Data);
+                    foreach(var entry in historyList)
+                    {
+                        History.Add(entry);
+                    }
                 }
             }
         }

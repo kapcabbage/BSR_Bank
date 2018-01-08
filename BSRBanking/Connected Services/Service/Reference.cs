@@ -16,10 +16,10 @@ namespace BSRBanking.Service {
     public interface IAccountManager {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetHistory", ReplyAction="http://tempuri.org/IAccountManager/GetHistoryResponse")]
-        BSRBankingDataContract.Base.AccountActionListDto GetHistory(int bankAccountId);
+        BSRBankingDataContract.Base.HistoryListResultDto GetHistory(int bankAccountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetHistory", ReplyAction="http://tempuri.org/IAccountManager/GetHistoryResponse")]
-        System.Threading.Tasks.Task<BSRBankingDataContract.Base.AccountActionListDto> GetHistoryAsync(int bankAccountId);
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.HistoryListResultDto> GetHistoryAsync(int bankAccountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/GetBankAccount", ReplyAction="http://tempuri.org/IAccountManager/GetBankAccountResponse")]
         BSRBankingDataContract.Base.BankResultDto GetBankAccount(int userId);
@@ -61,11 +61,11 @@ namespace BSRBanking.Service {
                 base(binding, remoteAddress) {
         }
         
-        public BSRBankingDataContract.Base.AccountActionListDto GetHistory(int bankAccountId) {
+        public BSRBankingDataContract.Base.HistoryListResultDto GetHistory(int bankAccountId) {
             return base.Channel.GetHistory(bankAccountId);
         }
         
-        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.AccountActionListDto> GetHistoryAsync(int bankAccountId) {
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.HistoryListResultDto> GetHistoryAsync(int bankAccountId) {
             return base.Channel.GetHistoryAsync(bankAccountId);
         }
         

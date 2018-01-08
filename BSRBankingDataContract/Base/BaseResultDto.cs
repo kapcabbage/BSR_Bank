@@ -34,6 +34,11 @@ namespace BSRBankingDataContract.Base
             Result.SetErrors(exception);
         }
 
+        public void SetErrors(String message)
+        {
+            Result.SetErrors(message);
+        }
+
         public void SetStatus(eOperationStatus status)
         {
             Result.Status = status;
@@ -59,7 +64,7 @@ namespace BSRBankingDataContract.Base
     }
 
     [DataContract(IsReference = true)]
-    public class AccountActionListDto : BaseResultDto<List<AccountActionDto>>
+    public class HistoryListResultDto : BaseResultDto<List<HistoryEntryDto>>
     {
 
     }
