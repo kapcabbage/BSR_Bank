@@ -13,6 +13,32 @@ namespace BSRBankingService.Services
 {
     public partial class Service : IAccountManager
     {
+        public BoolResultDto External(AccountActionDto action)
+        {
+            var result = new BoolResultDto();
+            try
+            {
+                if (Validation.ValidateNrb(action.DestinationBankNumber))
+                {
+                    action.ActionType = BSRBankingDataContract.Enums.eActionType.ExternalTranser;
+                    var transferResult = BankAccount.ExternalTransfer(action);
+                    if (transferResult.Success())
+                    {
+                        result = transferResult;
+                    }
+                }
+                else
+                {
+                    result.SetErrors("Account number is invalid");
+                }
+            }
+            catch (Exception ex)
+            {
+                result.SetErrors(ex);
+            }
+            return result;
+        }
+
         public BankResultDto GetBankAccount(int userId)
         {
             var result = new BankResultDto();
@@ -59,10 +85,18 @@ namespace BSRBankingService.Services
             var result = new BoolResultDto();
             try
             {
-                var transferResult = BankAccount.InternalTransfer(accountAction);
-                if (transferResult)
+                if (Validation.ValidateNrb(accountAction.DestinationBankNumber))
                 {
-                    result.SetSuccess(transferResult);
+                    accountAction.ActionType = BSRBankingDataContract.Enums.eActionType.InternalTransfer;
+                    var transferResult = BankAccount.InternalTransfer(accountAction);
+                    if (transferResult)
+                    {
+                        result.SetSuccess(transferResult);
+                    }
+                }
+                else
+                {
+                    result.SetErrors("Account number is invalid");
                 }
             }
             catch (Exception ex)

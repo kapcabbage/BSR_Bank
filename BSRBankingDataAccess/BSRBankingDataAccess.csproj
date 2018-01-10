@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BankAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BSRBankingDataContract\BSRBankingDataContract.csproj">

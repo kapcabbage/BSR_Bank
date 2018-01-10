@@ -34,37 +34,4 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="eOperationStatus" nillable="true" type="tns:eOperationStatus" />
-  <xs:simpleType name="eActionType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="SelfTransfer">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="SelfWithdrawal">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="InternalTransfer">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ExternalTranser">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="eActionType" nillable="true" type="tns:eActionType" />
 </xs:schema>

@@ -74,6 +74,7 @@ namespace BSRBanking.ViewModel
 
         private void getHistory(int bankId)
         {
+            var s = Computing.ComputeChecksum("001168340011225033158322");
             using(var client = new Service.AccountManagerClient())
             {
                 var result = client.GetHistory(bankId);

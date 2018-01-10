@@ -15,5 +15,10 @@ namespace BSRBankingService.Contracts
 
         [OperationContract]
         BoolResultDto Transfer(AccountActionDto action);
+
+        [OperationContract]
+        BoolResultDto External(AccountActionDto action);
+
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BSRBanking.Utils
 {
     public static class Computing
@@ -18,6 +19,26 @@ namespace BSRBanking.Utils
                 hash.Append(theByte.ToString("x2"));
             }
             return hash.ToString();
+        }
+
+        public static string ComputeChecksum(string input)
+        {
+            var bankId = input.Substring(0, 8);
+            var accountNumber = input.Substring(8, 16);
+            var output = bankId + accountNumber + "252100";
+            try
+            {
+    
+                var resultInt = 98 - (System.Numerics.BigInteger.Parse(output) % 97);
+                return resultInt.ToString(); ;
+            }
+            catch (Exception ex)
+            {
+                return "";
+
+            }
+            
+
         }
     }
 }
