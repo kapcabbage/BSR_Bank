@@ -10,6 +10,7 @@
         <TextBox Height="23" Width="150" Margin="56,110,60,0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{Binding UserName}"/>
         <PasswordBox Name="txtPassword" Margin="56,154,60,0" Width="150" Height="23" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Button Content="Login" Margin="107,203,115,0" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=txtPassword}" Width="78"/>
+        <Label Content="Login or password invalid" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="73,79,77,0" Width="150" Foreground="Red" Visibility="{Binding ErrorLabel}"/>
 
     </Grid>
 </Page>

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -18,9 +19,23 @@ namespace BSRBanking.ViewModel
     public class LoginViewModel: ViewModelBase
     {
         private string _userName;
+        private Visibility _errorLabel;
 
         public ICommand LoginCommand { get; set; }
  
+        public Visibility ErrorLabel
+        {
+            get
+            {
+                return _errorLabel;
+            }
+            set
+            {
+                _errorLabel = value;
+
+                RaisePropertyChanged("ErrorLabel");
+            }
+        }
 
         public string UserName
         {
@@ -40,6 +55,7 @@ namespace BSRBanking.ViewModel
         {
             _navigationService = navigationService;
             LoginCommand = new RelayCommand<object>(Login);
+            ErrorLabel = Visibility.Hidden;
         }
 
         public void Login(object parameter)
@@ -53,6 +69,10 @@ namespace BSRBanking.ViewModel
                 {
                     var userModel = Mapper.Map<UserModel>(result.Data);
                     _navigationService.NavigateTo("BankPage", userModel);
+                }
+                else
+                {
+                    ErrorLabel = Visibility.Visible;
                 }
             }
         }

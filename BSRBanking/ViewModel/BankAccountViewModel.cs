@@ -16,8 +16,9 @@ namespace BSRBanking.ViewModel
         private BankAccountModel _accountModel;
 
         private IFrameNavigationService _navigationService;
+        
+        public ICommand InternalTransferCommand { get; set; }
 
-        public ICommand InternalTransferCommand { get; set; } 
         public ObservableCollection<HistoryEntryModel> History { get; set; }
 
         public string OwnerName

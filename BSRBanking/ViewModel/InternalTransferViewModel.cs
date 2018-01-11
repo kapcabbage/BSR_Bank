@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BSRBanking.ViewModel
@@ -22,11 +23,41 @@ namespace BSRBanking.ViewModel
         private string _destinationNumber;
         private int _amount;
         private string _title;
+        private string _errorMessage;
 
 
+        private Visibility _errorLabel;
 
+        public Visibility ErrorLabel
+        {
+            get
+            {
+                return _errorLabel;
+            }
+            set
+            {
+                _errorLabel = value;
+
+                RaisePropertyChanged("ErrorLabel");
+            }
+        }
         private IFrameNavigationService _navigationService;
         public ICommand IssueTransfer { get; set; }
+                public ICommand CancelCommand { get; set; }
+
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+
+                RaisePropertyChanged("ErrorMessage");
+            }
+        }
 
         public string OwnerName
         {
@@ -104,9 +135,11 @@ namespace BSRBanking.ViewModel
         {
             _navigationService = navigationService;
             IssueTransfer = new RelayCommand(InternalTransfer);
+            CancelCommand = new RelayCommand(CancelTransfer);
             dynamic parameters = _navigationService.Parameter;
             _userModel = parameters.User;
             _accountModel = parameters.Account;
+            _errorLabel = Visibility.Hidden;
            
         }
 
@@ -114,10 +147,25 @@ namespace BSRBanking.ViewModel
         {
             var action = new AccountActionModel(eActionType.InternalTransfer, DestinationOwnerName, DestinationIdNumber, OwnerName, BankIdNumber,Title, Amount);
             var actionDto = Mapper.Map<AccountActionDto>(action);
+            ErrorLabel = Visibility.Hidden;
             using(var client = new Service.AccountManagerClient())
             {
                 var result = client.Transfer(actionDto);
+                if (result.Success())
+                {
+                    _navigationService.NavigateTo("BankPage","");
+                }
+                else
+                {
+                    ErrorMessage = result.Result.ExceptionMessage;
+                    ErrorLabel = Visibility.Visible;
+                }
             }
+        }
+
+        private void CancelTransfer()
+        {
+            _navigationService.NavigateTo("BankPage", "");
         }
 
     }

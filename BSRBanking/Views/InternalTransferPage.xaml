@@ -8,19 +8,19 @@
       d:DesignHeight="300" d:DesignWidth="500"
       Title="InternalTransferPage">
     <Grid DataContext="{Binding InternalTransfer, Source={StaticResource Locator}}">
-        <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="329,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="48" Width="161" FontSize="30" FontWeight="Bold"/>
-        <Label Content="{Binding BankIdNumber}" HorizontalAlignment="Left" Margin="67,44,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257" FontSize="16" FontWeight="Bold"/>
-        <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="67,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257"  FontWeight="Bold"/>
-        <TextBox Text="{Binding DestinationIdNumber}" HorizontalAlignment="Left" Height="23" Margin="67,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273" FontSize="18" />
-        <TextBox Text="{Binding DestinationOwnerName}" HorizontalAlignment="Left" Height="23" Margin="83,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
-        <TextBox Text="{Binding Title}" HorizontalAlignment="Left" Height="23" Margin="83,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
-        <TextBox Text="{Binding Amount}" HorizontalAlignment="Left" Height="23" Margin="83,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
-        <Button Content="Issue transfer" HorizontalAlignment="Left" Margin="67,252,0,0" VerticalAlignment="Top" Width="132" Height="23" Command="{Binding IssueTransfer}"/>
+        <Label Content="{Binding BankIdNumber}" HorizontalAlignment="Left" Margin="67,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="22" Width="257" FontSize="16" FontWeight="Bold"/>
+        <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="67,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="24" Width="257"  FontWeight="Bold"/>
+        <TextBox Text="{Binding DestinationIdNumber}" HorizontalAlignment="Left" Height="23" Margin="69,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273" FontSize="18" />
+        <TextBox Text="{Binding DestinationOwnerName}" HorizontalAlignment="Left" Height="23" Margin="83,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
+        <TextBox Text="{Binding Title}" HorizontalAlignment="Left" Height="23" Margin="83,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
+        <TextBox Text="{Binding Amount}" HorizontalAlignment="Left" Height="23" Margin="83,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
+        <Button Content="Issue transfer" HorizontalAlignment="Left" Margin="67,226,0,0" VerticalAlignment="Top" Width="132" Height="23" Command="{Binding IssueTransfer}"/>
         <Label Content="From" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Label Content="Number" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Label Content="Title" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Label Content="Amount(gr)" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="204,252,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+        <Label Content="Number" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
+        <Label Content="Title" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
+        <Label Content="Amount(gr)" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="204,226,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+        <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,261,10,0" Width="480" Foreground="Red" Visibility="{Binding ErrorLabel}" Height="29"/>
     </Grid>
 </Page>
