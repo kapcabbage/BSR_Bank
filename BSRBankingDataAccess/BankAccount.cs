@@ -10,6 +10,7 @@ using System.Text;
 using System.Net.Http;
 using System.Transactions;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace BSRBankingDataAccess
 {
@@ -130,6 +131,7 @@ namespace BSRBankingDataAccess
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ConfigurationManager.AppSettings["BaseAuthenticationUserName"], ConfigurationManager.AppSettings["BaseAuthenticationPassword"]))));
                     var content = new StringContent(data, Encoding.UTF8);
                     HttpResponseMessage response = client.PostAsync(accountAction.Url, content).Result;
                     if (!response.IsSuccessStatusCode)
@@ -163,6 +165,68 @@ namespace BSRBankingDataAccess
                 return result;
             }
 
+        }
+
+        public static ActionTypeResultDto CheckTransferType(string bankNumber)
+        {
+            var result = new ActionTypeResultDto();
+            try
+            {
+                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+                {
+
+                    var query = "select BankAccountId from BankAccounts where BankAccountNumber = @bankNumb";
+                    var queryResult = connection.Query<int>(query, new { bankNumb = bankNumber });
+                    if (queryResult != null && queryResult.FirstOrDefault() > 0)
+                    {
+                        result.SetSuccess(BSRBankingDataContract.Enums.eActionType.InternalTransfer);
+                    }
+                    else
+                    {
+                        result.SetSuccess(BSRBankingDataContract.Enums.eActionType.ExternalTranser);
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.SetErrors(ex.Message);
+                return result;
+            }
+
+        }
+
+        public static StringResultDto CheckExternalAccount(string externalBankNumber)
+        {
+            var result = new StringResultDto();
+            var givenBankId = externalBankNumber.Substring(2, 8);
+            using (var reader = new StreamReader(@"..\..\CSVBANK.csv"))
+            {
+                var list = new List<ExternalAccountDto>();
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    list.Add(new ExternalAccountDto()
+                    {
+                        BankId = values[0],
+                        Url = values[1]
+                    });
+                }
+
+                if(list.Any(x=>x.BankId == givenBankId))
+                {
+                    var url = list.FirstOrDefault(x=>x.BankId == givenBankId);
+                    result.SetSuccess(url.Url);
+                }
+                else
+                {
+                    result.SetErrors("Account number not found");
+                }
+            }
+
+            return result;
         }
 
     }

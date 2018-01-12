@@ -8,6 +8,7 @@ using System.Transactions;
 using Dapper;
 using System.Linq;
 using BSRBankingDataAccess;
+using BSRBankingDataContract.Enums;
 
 namespace BSRBankingService.Services
 {
@@ -87,11 +88,37 @@ namespace BSRBankingService.Services
             {
                 if (Validation.ValidateNrb(accountAction.DestinationBankNumber))
                 {
-                    accountAction.ActionType = BSRBankingDataContract.Enums.eActionType.InternalTransfer;
-                    var transferResult = BankAccount.InternalTransfer(accountAction);
-                    if (transferResult)
+                    var transferType = BankAccount.CheckTransferType(accountAction.DestinationBankNumber);
+                    if (transferType.Success() && transferType.Data == eActionType.InternalTransfer)
                     {
-                        result.SetSuccess(transferResult);
+                        accountAction.ActionType = eActionType.InternalTransfer;
+                        var transferResult = BankAccount.InternalTransfer(accountAction);
+                        if (transferResult)
+                        {
+                            result.SetSuccess(transferResult);
+                        }
+                    }
+                    else if (transferType.Success() && transferType.Data == eActionType.ExternalTranser)
+                    {
+                        var externalValidation = BankAccount.CheckExternalAccount(accountAction.DestinationBankNumber);
+                        if (externalValidation.Success())
+                        {
+                            accountAction.Url = externalValidation.Data;
+                            accountAction.ActionType = eActionType.ExternalTranser;
+                            var transferResult = BankAccount.ExternalTransfer(accountAction);
+                            if (transferResult.Success())
+                            {
+                                result.SetSuccess(transferResult.Data);
+                            }
+                            else
+                            {
+                                result.SetErrors(transferResult.Result.ExceptionMessage);
+                            }
+                        }
+                        else
+                        {
+                            result.SetErrors(externalValidation.Result.ExceptionMessage);
+                        }
                     }
                 }
                 else

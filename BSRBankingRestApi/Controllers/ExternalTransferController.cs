@@ -2,6 +2,7 @@
 using BSRBankingDataContract.Dtos;
 using BSRBankingDataContract.Enums;
 using BSRBankingRestApi.Authorization;
+using BSRBankingRestApi.Models;
 using Newtonsoft.Json;
 using System;
 using System.Web.Http;
@@ -20,25 +21,32 @@ namespace BSRBankingRestApi.Controllers
                 AccountActionDto dto = JsonConvert.DeserializeObject<AccountActionDto>(input.ToString());
                 dto.DestinationBankNumber = accountNumber;
                 dto.ActionType = eActionType.ExternalTranser;
+                var validationResult = Validation.ValidateNrb(accountNumber);
+                var validateSource = Validation.ValidateNrb(dto.SourceBankNumber);
+                if (!(validationResult && validateSource))
+                {
+                    var error = new ErrorModel("Account number invalid","AccountNumber");
+                    return BadRequest(JsonConvert.SerializeObject(error));
+                }
                 if (dto.DestinationName == null || dto.DestinationName == string.Empty)
                 {
-                    return BadRequest("Destination name cannot be empty");
-                }
-                if (dto.SourceBankNumber == null || dto.SourceBankNumber == string.Empty)
-                {
-                    return BadRequest("Source bank number can not be empty");
+                    var error = new ErrorModel("Destination name cannot be empty", "DestinationName");
+                    return BadRequest(JsonConvert.SerializeObject(error));
                 }
                 if (dto.SourceName == null || dto.SourceName == string.Empty)
                 {
-                    return BadRequest("Source name can't be empty");
+                    var error = new ErrorModel("Source name cannot be empty", "SourceName");
+                    return BadRequest(JsonConvert.SerializeObject(error));
                 }
                 if (dto.Amount < 0)
                 {
-                    return BadRequest("Amount can't be lower then 0");
+                    var error = new ErrorModel("Amount cannot be lower than 0", "Amount");
+                    return BadRequest(JsonConvert.SerializeObject(error));
                 }
                 if (dto.Title == null || dto.Title == string.Empty)
                 {
-                    return BadRequest("Title can't be empty");
+                    var error = new ErrorModel("Title cannot be empty", "Title");
+                    return BadRequest(JsonConvert.SerializeObject(error));
                 }
 
                 var result = BankAccount.ReceiveTransfer(dto);

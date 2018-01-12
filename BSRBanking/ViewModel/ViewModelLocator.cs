@@ -93,7 +93,7 @@ namespace BSRBanking.ViewModel
             var navigationService = new FrameNavigationService();
             navigationService.Configure("LoginPage", new Uri("../Views/LoginPage.xaml", UriKind.Relative));
             navigationService.Configure("BankPage", new Uri("../Views/BankAccountPage.xaml", UriKind.Relative));
-            navigationService.Configure("InternalTransferPage", new Uri("../Views/InternalTransferPage.xaml", UriKind.Relative));
+            navigationService.Configure("TransferPage", new Uri("../Views/InternalTransferPage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }

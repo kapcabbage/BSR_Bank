@@ -80,4 +80,16 @@ namespace BSRBankingDataContract.Base
     {
 
     }
+
+    [DataContract(IsReference = true)]
+    public class ActionTypeResultDto : BaseResultDto<eActionType>
+    {
+
+    }
+
+    [DataContract(IsReference = true)]
+    public class StringResultDto : BaseResultDto<string>
+    {
+
+    }
 }

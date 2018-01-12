@@ -20,8 +20,7 @@
         <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="233,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257"  FontWeight="Bold"/>
         <Button Content="Wpłata własna" HorizontalAlignment="Left" Margin="233,270,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
         <Button Content="Wypłata własna" HorizontalAlignment="Left" Margin="233,245,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
-        <Button Content="Zleć przelew wewnętrzny" HorizontalAlignment="Left" Margin="233,195,0,0" VerticalAlignment="Top" Width="257" Height="20" Command="{Binding InternalTransferCommand}"/>
-        <Button Content="Zleć przelew zewnętrzny" HorizontalAlignment="Left" Margin="233,220,0,0" VerticalAlignment="Top" Width="257" Height="20" />
+        <Button Content="Zleć przelew" HorizontalAlignment="Left" Margin="233,220,0,0" VerticalAlignment="Top" Width="257" Height="20" Command="{Binding TransferCommand}"/>
         <ListView HorizontalAlignment="Left" Height="261" Margin="10,29,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding History}">
             <ListView.View>
                 <GridView>

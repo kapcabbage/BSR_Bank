@@ -20,7 +20,7 @@
         <Label Content="Name" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
         <Label Content="Title" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
         <Label Content="Amount(gr)" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="204,226,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="204,226,0,0" VerticalAlignment="Top" Width="120" Height="23" Command="{Binding CancelCommand}"/>
         <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,261,10,0" Width="480" Foreground="Red" Visibility="{Binding ErrorLabel}" Height="29"/>
     </Grid>
 </Page>

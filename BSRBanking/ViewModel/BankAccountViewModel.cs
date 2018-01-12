@@ -17,7 +17,7 @@ namespace BSRBanking.ViewModel
 
         private IFrameNavigationService _navigationService;
         
-        public ICommand InternalTransferCommand { get; set; }
+        public ICommand TransferCommand { get; set; }
 
         public ObservableCollection<HistoryEntryModel> History { get; set; }
 
@@ -49,16 +49,16 @@ namespace BSRBanking.ViewModel
         {
             _navigationService = navigationService;
             _userModel = _navigationService.Parameter as UserModel;
-            InternalTransferCommand = new RelayCommand(callInternalTransfer);
+            TransferCommand = new RelayCommand(callTransfer);
             History = new ObservableCollection<HistoryEntryModel>();
             getAccount(_userModel.UserId);
             getHistory(_accountModel.BankAccountId);
            
         }
 
-        private void callInternalTransfer()
+        private void callTransfer()
         {
-            _navigationService.NavigateTo("InternalTransferPage",new { User = _userModel, Account = _accountModel});
+            _navigationService.NavigateTo("TransferPage",new { User = _userModel, Account = _accountModel});
         }
 
         private void getAccount(int userId)
