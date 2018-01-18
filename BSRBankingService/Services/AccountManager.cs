@@ -49,10 +49,8 @@ namespace BSRBankingService.Services
                 {
                     action.ActionType = BSRBankingDataContract.Enums.eActionType.ExternalTranser;
                     var transferResult = BankAccount.ExternalTransfer(action);
-                    if (transferResult.Success())
-                    {
-                        result = transferResult;
-                    }
+                    result = transferResult;
+                    
                 }
                 else
                 {
@@ -172,10 +170,7 @@ namespace BSRBankingService.Services
                 {
                     action.ActionType = BSRBankingDataContract.Enums.eActionType.Withdrawal;
                     var transferResult = BankAccount.Withdraw(action);
-                    if (transferResult.Success())
-                    {
-                        result = transferResult;
-                    }
+                    result = transferResult;
                 }
                 else
                 {

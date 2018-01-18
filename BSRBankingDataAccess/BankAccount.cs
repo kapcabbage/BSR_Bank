@@ -156,7 +156,6 @@ namespace BSRBankingDataAccess
             using (var connection = DbContext.SimpleDbConnection())
             {
                 connection.Open();
-                connection.Open();
                 var queryBalance = "select Balance from BankAccounts where BankAccountNumber  = @BankId";
                 var queryBalanceResult = connection.Query<int>(queryBalance, new { BankId = accountAction.SourceBankNumber });
                 if (queryBalanceResult.First() > accountAction.Amount && accountAction.Amount != 0)
@@ -165,9 +164,6 @@ namespace BSRBankingDataAccess
                     {
                         var data = Newtonsoft.Json.JsonConvert.SerializeObject(accountAction);
                         HttpClient client = new HttpClient();
-                        var sad = ConfigurationManager.AppSettings["BasicAuthenticationUserName"];
-                        var asz = ConfigurationManager.AppSettings["BasicAuthenticationPassword"];
-                        var asd = string.Format("{0}:{1}", ConfigurationManager.AppSettings["BasicAuthenticationUserName"], ConfigurationManager.AppSettings["BasicAuthenticationPassword"]);
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ConfigurationManager.AppSettings["BasicAuthenticationUserName"], ConfigurationManager.AppSettings["BasicAuthenticationPassword"]))));
                         var content = new StringContent(data, Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync(accountAction.Url, content).Result;
