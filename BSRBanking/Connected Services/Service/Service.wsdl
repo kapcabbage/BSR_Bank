@@ -27,6 +27,24 @@
   <wsdl:message name="IAccountManager_Transfer_OutputMessage">
     <wsdl:part name="parameters" element="tns:TransferResponse" />
   </wsdl:message>
+  <wsdl:message name="IAccountManager_External_InputMessage">
+    <wsdl:part name="parameters" element="tns:External" />
+  </wsdl:message>
+  <wsdl:message name="IAccountManager_External_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExternalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountManager_Withdraw_InputMessage">
+    <wsdl:part name="parameters" element="tns:Withdraw" />
+  </wsdl:message>
+  <wsdl:message name="IAccountManager_Withdraw_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WithdrawResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccountManager_Deposit_InputMessage">
+    <wsdl:part name="parameters" element="tns:Deposit" />
+  </wsdl:message>
+  <wsdl:message name="IAccountManager_Deposit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DepositResponse" />
+  </wsdl:message>
   <wsdl:message name="IAuthorization_AuthenticateUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AuthenticateUser" />
   </wsdl:message>
@@ -45,6 +63,18 @@
     <wsdl:operation name="Transfer">
       <wsdl:input wsaw:Action="http://tempuri.org/IAccountManager/Transfer" message="tns:IAccountManager_Transfer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAccountManager/TransferResponse" message="tns:IAccountManager_Transfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="External">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountManager/External" message="tns:IAccountManager_External_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountManager/ExternalResponse" message="tns:IAccountManager_External_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Withdraw">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountManager/Withdraw" message="tns:IAccountManager_Withdraw_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountManager/WithdrawResponse" message="tns:IAccountManager_Withdraw_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAccountManager/Deposit" message="tns:IAccountManager_Deposit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAccountManager/DepositResponse" message="tns:IAccountManager_Deposit_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAuthorization">
@@ -75,6 +105,33 @@
     </wsdl:operation>
     <wsdl:operation name="Transfer">
       <soap:operation soapAction="http://tempuri.org/IAccountManager/Transfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="External">
+      <soap:operation soapAction="http://tempuri.org/IAccountManager/External" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Withdraw">
+      <soap:operation soapAction="http://tempuri.org/IAccountManager/Withdraw" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <soap:operation soapAction="http://tempuri.org/IAccountManager/Deposit" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

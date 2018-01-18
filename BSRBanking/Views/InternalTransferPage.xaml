@@ -8,9 +8,9 @@
       d:DesignHeight="300" d:DesignWidth="500"
       Title="InternalTransferPage">
     <Grid DataContext="{Binding InternalTransfer, Source={StaticResource Locator}}">
-        <Label Content="{Binding BankIdNumber}" HorizontalAlignment="Left" Margin="67,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="22" Width="257" FontSize="16" FontWeight="Bold"/>
-        <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="67,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="24" Width="257"  FontWeight="Bold"/>
-        <TextBox Text="{Binding DestinationIdNumber}" HorizontalAlignment="Left" Height="23" Margin="69,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273" FontSize="18" />
+        <Label Content="{Binding BankIdNumber}" HorizontalAlignment="Left" Margin="67,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="25" Width="257" FontSize="12" FontWeight="Bold"/>
+        <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="24" Width="257"  FontWeight="Bold"/>
+        <TextBox Text="{Binding DestinationIdNumber}" HorizontalAlignment="Left" Height="23" Margin="67,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273" FontSize="18" />
         <TextBox Text="{Binding DestinationOwnerName}" HorizontalAlignment="Left" Height="23" Margin="83,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
         <TextBox Text="{Binding Title}" HorizontalAlignment="Left" Height="23" Margin="83,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
         <TextBox Text="{Binding Amount}" HorizontalAlignment="Left" Height="23" Margin="83,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18" />
@@ -19,7 +19,7 @@
         <Label Content="Number" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
         <Label Content="Title" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
-        <Label Content="Amount(gr)" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
+        <Label Content="Amount" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.155"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="204,226,0,0" VerticalAlignment="Top" Width="120" Height="23" Command="{Binding CancelCommand}"/>
         <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,261,10,0" Width="480" Foreground="Red" Visibility="{Binding ErrorLabel}" Height="29"/>
     </Grid>

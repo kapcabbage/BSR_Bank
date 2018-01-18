@@ -37,6 +37,7 @@
       <xs:element minOccurs="0" name="SourceBankNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AccountActionDto" nillable="true" type="tns:AccountActionDto" />

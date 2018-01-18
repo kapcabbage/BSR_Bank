@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using Dapper;
 using BSRBankingDataContract.Dtos;
 using System.Linq;
+using BSRBankingDataAccess;
 
 namespace BSRBankingService.Services
 {
@@ -16,19 +17,15 @@ namespace BSRBankingService.Services
             var result = new UserResultDto();
             try
             {
-                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+                var user = Authorization.Authorize(userName, passwordHash);
+
+                if (user.Success())
                 {
-                    var query = "SELECT TOP 1 * FROM Users u inner join UsersPasswords p on p.UserId = u.UserId where u.UserName = @username and p.PasswordHash = @passwordhash";
-                    var any = connection.Query<UserDto>(query,new { username = userName, passwordhash = passwordHash}).AsList();
-                    if (any.Count == 0)
-                    {
-                        result.SetStatus(BSRBankingDataContract.Enums.eOperationStatus.AccessDenied);
-                    }
-                    else
-                    {
-                        result.SetSuccess(any.FirstOrDefault());
-                    }
-                    
+                    result.SetSuccess(user.Data);
+                }
+                else
+                {
+                    result.SetErrors(user.Result.ExceptionMessage);
                 }
             }
             catch (Exception ex)

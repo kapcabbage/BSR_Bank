@@ -14,14 +14,15 @@
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Label HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Height="26" Width="51"/>
-        <Label Content="Saldo: " HorizontalAlignment="Left" Margin="233,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="43"/>
+        <Label Content="Balance: " HorizontalAlignment="Left" Margin="233,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="43"/>
         <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="281,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="48" Width="166" FontSize="30" FontWeight="Bold"/>
         <Label Content="{Binding BankIdNumber}" HorizontalAlignment="Left" Margin="233,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257" FontSize="16" FontWeight="Bold"/>
         <Label Content="{Binding OwnerName}" HorizontalAlignment="Left" Margin="233,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,0.079" Height="29" Width="257"  FontWeight="Bold"/>
-        <Button Content="Wpłata własna" HorizontalAlignment="Left" Margin="233,270,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
-        <Button Content="Wypłata własna" HorizontalAlignment="Left" Margin="233,245,0,0" VerticalAlignment="Top" Width="257" Height="20"/>
-        <Button Content="Zleć przelew" HorizontalAlignment="Left" Margin="233,220,0,0" VerticalAlignment="Top" Width="257" Height="20" Command="{Binding TransferCommand}"/>
-        <ListView HorizontalAlignment="Left" Height="261" Margin="10,29,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding History}">
+
+        <Button Content="Deposit" HorizontalAlignment="Left" Margin="366,238,0,0" VerticalAlignment="Top" Width="124" Height="20"  Command="{Binding Deposit}"/>
+        <Button Content="Withdraw" HorizontalAlignment="Left" Margin="366,213,0,0" VerticalAlignment="Top" Width="124" Height="20"  Command="{Binding Withdraw}"/>
+        <Button Content="Issue transfer" HorizontalAlignment="Left" Margin="233,188,0,0" VerticalAlignment="Top" Width="257" Height="20" Command="{Binding TransferCommand}"/>
+        <ListView HorizontalAlignment="Left" Height="229" Margin="10,29,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding History}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Source Name"  DisplayMemberBinding="{Binding SourceName}"/>
@@ -33,7 +34,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-
+        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="233,163,0,0" Command="{Binding Refresh}"/>
+        <TextBox Text="{Binding Amount}" HorizontalAlignment="Left" Height="45" Margin="233,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" FontSize="18" />
+        <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,261,10,0" Width="480" Foreground="Red" Visibility="{Binding ErrorLabel}" Height="29"/>
     </Grid>
 </Page>

@@ -9,9 +9,9 @@ namespace BSRBankingDataContract.Enums
     public enum eActionType
     {
         [EnumMember]
-        SelfTransfer = 1,
+        Deposit = 1,
         [EnumMember]
-        SelfWithdrawal = 2,
+        Withdrawal = 2,
         [EnumMember]
         InternalTransfer =3,
         [EnumMember]

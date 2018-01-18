@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Transactions;
 using System.IO;
 using System.Net.Http.Headers;
+using BSRBankingDataAccess.Context;
 
 namespace BSRBankingDataAccess
 {
@@ -18,69 +19,91 @@ namespace BSRBankingDataAccess
     {
         public static List<HistoryEntryDto> GetHistory(int bankAccountId)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+            using (var connection = DbContext.SimpleDbConnection())
             {
                 var query = "select * from History_V where BankAccountId = @bankId";
                 var history = connection.Query<HistoryEntryDto>(query, new { bankId = bankAccountId }).AsList();
                 if (history != null)
                 {
+                    connection.Close();
                     return history;
                 }
-                else return new List<HistoryEntryDto>();
+                else connection.Close(); return new List<HistoryEntryDto>();
             }
         }
 
         public static BankAccountDto GetBankAccount(int userId)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+            using (var connection = DbContext.SimpleDbConnection())
             {
-                var query = "SELECT TOP 1 * FROM BankAccounts where OwnerId = @userid";
+                var query = "SELECT * FROM BankAccounts where OwnerId = @userid limit 1";
                 var any = connection.Query<BankAccountDto>(query, new { userid = userId }).AsList();
                 if (any.Count == 0)
                 {
+                    connection.Close();
                     return null;
                 }
                 else
                 {
+                    connection.Close();
                     return any.FirstOrDefault();
                 }
 
             }
         }
 
-        public static bool InternalTransfer(AccountActionDto accountAction)
+        public static BoolResultDto InternalTransfer(AccountActionDto accountAction)
         {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+            using (var connection = DbContext.SimpleDbConnection())
             {
-                using (var transactionScope = new TransactionScope())
+                var result = new BoolResultDto();
+                connection.Open();
+                var queryBalance = "select Balance from BankAccounts where BankAccountNumber  = @BankId";
+                var queryBalanceResult = connection.Query<int>(queryBalance, new { BankId = accountAction.SourceBankNumber });
+                if (queryBalanceResult.First() > accountAction.Amount && accountAction.Amount != 0)
                 {
-                    var querySelf = "update BankAccounts set Balance = (Balance - @amount) OUTPUT INSERTED.BankAccountId where BankAccountNumber = @bankId";
-                    var queryDest = "update BankAccounts set Balance = (Balance + @amount) OUTPUT INSERTED.BankAccountId where BankAccountNumber = @bankId";
-                    var insertAction = "insert into AccountActions OUTPUT INSERTED.AccountActionId values(@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount)";
-                    var insertHistory = "insert into BankAccountHistory OUTPUT INSERTED.BankAccountHistoryId values(@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date)";
-                    var updateSelfResult = connection.Query<int>(querySelf, new { bankId = accountAction.SourceBankNumber, amount = accountAction.Amount }).AsList();
-                    var updateDestResult = connection.Query<int>(queryDest, new { bankId = accountAction.DestinationBankNumber, amount = accountAction.Amount }).AsList(); ;
-                    var insertActionResult = connection.Query<int>(insertAction, new
+                    using (var transactionScope = connection.BeginTransaction())
                     {
-                        actionType = (int)accountAction.ActionType,
-                        title = accountAction.Title,
-                        sourceName = accountAction.SourceName,
-                        destName = accountAction.DestinationName,
-                        sourceNumber = accountAction.SourceBankNumber,
-                        destNumber = accountAction.DestinationBankNumber,
-                        amount = accountAction.Amount
-                    }).AsList();
-                    var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateSelfResult.First(), bankNumber = accountAction.SourceBankNumber, date = DateTime.Now });
-                    var insertDestHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateDestResult.First(), bankNumber = accountAction.DestinationBankNumber, date = DateTime.Now });
-                    if (insertDestHistory.First() != 0 && insertSelfHistory.First() != 0)
-                    {
-                        transactionScope.Complete();
-                        return true;
+                        var querySelf = "update BankAccounts set Balance = (Balance - @amount) where BankAccountNumber = @bankId;select BankAccountId from BankAccounts where BankAccountNumber = @bankId";
+                        var queryDest = "update BankAccounts set Balance = (Balance + @amount)  where BankAccountNumber = @bankId;select BankAccountId from  BankAccounts where BankAccountNumber = @bankId";
+                        var insertAction = "insert into AccountActions values(null,@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount);select last_insert_rowid()";
+                        var insertHistory = "insert into BankAccountHistory values(null,@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date);select last_insert_rowid()";
+                        var updateSelfResult = connection.Query<int>(querySelf, new { bankId = accountAction.SourceBankNumber, amount = accountAction.Amount });
+                        var updateDestResult = connection.Query<int>(queryDest, new { bankId = accountAction.DestinationBankNumber, amount = accountAction.Amount });
+                        var insertActionResult = connection.Query<int>(insertAction, new
+                        {
+                            actionType = (int)accountAction.ActionType,
+                            title = accountAction.Title,
+                            sourceName = accountAction.SourceName,
+                            destName = accountAction.DestinationName,
+                            sourceNumber = accountAction.SourceBankNumber,
+                            destNumber = accountAction.DestinationBankNumber,
+                            amount = accountAction.Amount
+                        }).AsList();
+                        var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateSelfResult.First(), bankNumber = accountAction.SourceBankNumber, date = DateTime.Now });
+                        var insertDestHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateDestResult.First(), bankNumber = accountAction.DestinationBankNumber, date = DateTime.Now });
+                        if (insertDestHistory.First() != 0 && insertSelfHistory.First() != 0)
+                        {
+                            transactionScope.Commit();
+                            result.SetSuccess(true);
+
+                        }
+                        else
+                        {
+                            transactionScope.Rollback();
+                            result.SetErrors("");
+                        }
+                        connection.Close();
+                        return result;
+
                     }
-
-                    return false;
-
                 }
+                else
+                {
+                    result.SetErrors("Invalid amount");
+                    return result;
+                }
+                
 
             }
         }
@@ -89,13 +112,14 @@ namespace BSRBankingDataAccess
         {
             var result = new BoolResultDto();
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+            using (var connection = DbContext.SimpleDbConnection())
             {
-                using (var transactionScope = new TransactionScope())
+                connection.Open();
+                using (var transactionScope = connection.BeginTransaction())
                 {
-                    var query = "update BankAccounts set Balance = (Balance + @amount) output inserted.BankAccountId where BankAccountNumber = @bankId";
-                    var insertAction = "insert into AccountActions OUTPUT INSERTED.AccountActionId values(@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount)";
-                    var insertHistory = "insert into BankAccountHistory OUTPUT INSERTED.BankAccountHistoryId values(@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date)";
+                    var query = "update BankAccounts set Balance = (Balance + @amount) where BankAccountNumber = @bankId;select BankAccountId from BankAccounts where BankAccountNumber = @bankId";
+                    var insertAction = "insert into AccountActions values(null,@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount);select last_insert_rowid()";
+                    var insertHistory = "insert into BankAccountHistory  values(null,@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date);select last_insert_rowid()";
                     var updateResult = connection.Query<int>(query, new { bankId = accountAction.DestinationBankNumber, amount = accountAction.Amount });
                     var insertActionResult = connection.Query<int>(insertAction, new
                     {
@@ -107,13 +131,19 @@ namespace BSRBankingDataAccess
                         destNumber = accountAction.DestinationBankNumber,
                         amount = accountAction.Amount
                     }).AsList();
-                    var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = query.First(), bankNumber = accountAction.DestinationBankNumber, date = DateTime.Now });
+                    var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateResult.First(), bankNumber = accountAction.DestinationBankNumber, date = DateTime.Now });
                     if(insertSelfHistory.First() != 0)
                     {
-                        transactionScope.Complete();
+                        transactionScope.Commit();
                         result.SetSuccess(true);
                     }
+                    else
+                    {
+                        transactionScope.Rollback();
+                        result.SetErrors("Cannot transfer");
+                    }
                 }
+                connection.Close();
                 return result;
             }
                
@@ -123,27 +153,85 @@ namespace BSRBankingDataAccess
         {
             var result = new BoolResultDto();
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+            using (var connection = DbContext.SimpleDbConnection())
             {
-                using (var transactionScope = new TransactionScope())
+                connection.Open();
+                connection.Open();
+                var queryBalance = "select Balance from BankAccounts where BankAccountNumber  = @BankId";
+                var queryBalanceResult = connection.Query<int>(queryBalance, new { BankId = accountAction.SourceBankNumber });
+                if (queryBalanceResult.First() > accountAction.Amount && accountAction.Amount != 0)
                 {
-                    var data = Newtonsoft.Json.JsonConvert.SerializeObject(accountAction);
-                    HttpClient client = new HttpClient();
-                    client.DefaultRequestHeaders.Accept.Add(
-                    new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ConfigurationManager.AppSettings["BaseAuthenticationUserName"], ConfigurationManager.AppSettings["BaseAuthenticationPassword"]))));
-                    var content = new StringContent(data, Encoding.UTF8);
-                    HttpResponseMessage response = client.PostAsync(accountAction.Url, content).Result;
-                    if (!response.IsSuccessStatusCode)
+                    using (var transactionScope = connection.BeginTransaction())
                     {
-                        throw new Exception(response.ReasonPhrase);
+                        var data = Newtonsoft.Json.JsonConvert.SerializeObject(accountAction);
+                        HttpClient client = new HttpClient();
+                        var sad = ConfigurationManager.AppSettings["BasicAuthenticationUserName"];
+                        var asz = ConfigurationManager.AppSettings["BasicAuthenticationPassword"];
+                        var asd = string.Format("{0}:{1}", ConfigurationManager.AppSettings["BasicAuthenticationUserName"], ConfigurationManager.AppSettings["BasicAuthenticationPassword"]);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", ConfigurationManager.AppSettings["BasicAuthenticationUserName"], ConfigurationManager.AppSettings["BasicAuthenticationPassword"]))));
+                        var content = new StringContent(data, Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = client.PostAsync(accountAction.Url, content).Result;
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            throw new Exception(response.ReasonPhrase);
+                        }
+                        else
+                        {
+                            var query = "update BankAccounts set Balance = (Balance - @amount) where BankAccountNumber = @bankId;select BankAccountId from BankAccounts where BankAccountNumber = @bankId";
+                            var insertAction = "insert into AccountActions values(null,@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount);select last_insert_rowid()";
+                            var insertHistory = "insert into BankAccountHistory values(null,@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date);select last_insert_rowid()";
+                            var updateResult = connection.Execute(query, new { bankId = accountAction.DestinationBankNumber, amount = accountAction.Amount });
+                            var insertActionResult = connection.Query<int>(insertAction, new
+                            {
+                                actionType = (int)accountAction.ActionType,
+                                title = accountAction.Title,
+                                sourceName = accountAction.SourceName,
+                                destName = accountAction.DestinationName,
+                                sourceNumber = accountAction.SourceBankNumber,
+                                destNumber = accountAction.DestinationBankNumber,
+                                amount = accountAction.Amount
+                            }).AsList();
+                            var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = query.First(), bankNumber = accountAction.DestinationBankNumber, date = DateTime.Now });
+                            if (insertSelfHistory.First() != 0)
+                            {
+                                transactionScope.Commit();
+                                result.SetSuccess(true);
+                            }
+                            else
+                            {
+                                transactionScope.Rollback();
+                            }
+                        }
                     }
-                    else
+                    connection.Close();
+                    return result;
+                }
+                else
+                {
+                    result.SetErrors("Invalid value");
+                    return result;
+                }
+            }
+           
+
+        }
+
+        public static BoolResultDto Withdraw(AccountActionDto accountAction)
+        {
+            using (var connection = DbContext.SimpleDbConnection())
+            {
+                var result = new BoolResultDto();
+                connection.Open();
+                var queryBalance = "select Balance from BankAccounts where BankAccountNumber  = @BankId";
+                var queryBalanceResult = connection.Query<int>(queryBalance, new { BankId = accountAction.SourceBankNumber });
+                if (queryBalanceResult.First() > accountAction.Amount && accountAction.Amount != 0)
+                {
+                    using (var transactionScope = connection.BeginTransaction())
                     {
-                        var query = "update BankAccounts set Balance = (Balance - @amount) output inserted.BankAccountId where BankAccountNumber = @bankId";
-                        var insertAction = "insert into AccountActions OUTPUT INSERTED.AccountActionId values(@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount)";
-                        var insertHistory = "insert into BankAccountHistory OUTPUT INSERTED.BankAccountHistoryId values(@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date)";
-                        var updateResult = connection.Query<int>(query, new { bankId = accountAction.DestinationBankNumber, amount = accountAction.Amount });
+                        var querySelf = "update BankAccounts set Balance = (Balance - @amount) where BankAccountNumber = @bankId;select BankAccountId from BankAccounts where BankAccountNumber = @bankId";
+                        var insertAction = "insert into AccountActions values(null,@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount);select last_insert_rowid()";
+                        var insertHistory = "insert into BankAccountHistory values(null,@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date);select last_insert_rowid()";
+                        var updateSelfResult = connection.Query<int>(querySelf, new { bankId = accountAction.SourceBankNumber, amount = accountAction.Amount });
                         var insertActionResult = connection.Query<int>(insertAction, new
                         {
                             actionType = (int)accountAction.ActionType,
@@ -154,17 +242,86 @@ namespace BSRBankingDataAccess
                             destNumber = accountAction.DestinationBankNumber,
                             amount = accountAction.Amount
                         }).AsList();
-                        var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = query.First(), bankNumber = accountAction.DestinationBankNumber, date = DateTime.Now });
-                        if (insertSelfHistory.First() != 0)
+
+                        var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateSelfResult.First(), bankNumber = accountAction.SourceBankNumber, date = DateTime.Now });
+                        if (insertSelfHistory.First() > 0)
                         {
-                            transactionScope.Complete();
+                            transactionScope.Commit();
                             result.SetSuccess(true);
+
                         }
+                        else
+                        {
+                            transactionScope.Rollback();
+                            result.SetErrors("");
+                        }
+                        connection.Close();
+                        return result;
+
                     }
                 }
-                return result;
-            }
+                else
+                {
+                    result.SetErrors("Invalid amount");
+                    return result;
+                }
 
+
+            }
+        }
+
+        public static BoolResultDto Deposit(AccountActionDto accountAction)
+        {
+            using (var connection = DbContext.SimpleDbConnection())
+            {
+                var result = new BoolResultDto();
+                connection.Open();
+                var queryBalance = "select Balance from BankAccounts where BankAccountNumber  = @BankId";
+                var queryBalanceResult = connection.Query<int>(queryBalance, new { BankId = accountAction.SourceBankNumber });
+                if (accountAction.Amount > 0)
+                {
+                    using (var transactionScope = connection.BeginTransaction())
+                    {
+                        var querySelf = "update BankAccounts set Balance = (Balance + @amount) where BankAccountNumber = @bankId;select BankAccountId from BankAccounts where BankAccountNumber = @bankId";
+                        var insertAction = "insert into AccountActions values(null,@actionType, @title, @sourceName, @destName, @sourceNumber, @destNumber, @amount);select last_insert_rowid()";
+                        var insertHistory = "insert into BankAccountHistory values(null,@actionId, @bankId, (select Balance from BankAccounts where BankAccountNumber = @bankNumber), @date);select last_insert_rowid()";
+                        var updateSelfResult = connection.Query<int>(querySelf, new { bankId = accountAction.SourceBankNumber, amount = accountAction.Amount });
+                        var insertActionResult = connection.Query<int>(insertAction, new
+                        {
+                            actionType = (int)accountAction.ActionType,
+                            title = accountAction.Title,
+                            sourceName = accountAction.SourceName,
+                            destName = accountAction.DestinationName,
+                            sourceNumber = accountAction.SourceBankNumber,
+                            destNumber = accountAction.DestinationBankNumber,
+                            amount = accountAction.Amount
+                        }).AsList();
+
+                        var insertSelfHistory = connection.Query<int>(insertHistory, new { actionId = insertActionResult.First(), bankId = updateSelfResult.First(), bankNumber = accountAction.SourceBankNumber, date = DateTime.Now });
+                        if (insertSelfHistory.First() > 0)
+                        {
+                            transactionScope.Commit();
+                            result.SetSuccess(true);
+
+                        }
+                        else
+                        {
+                            transactionScope.Rollback();
+                            result.SetErrors("");
+                        }
+                        connection.Close();
+                        return result;
+
+                    }
+                }
+                else
+                {
+                    result.SetErrors("Invalid amount");
+                    return result;
+                }
+
+
+            }
         }
 
         public static ActionTypeResultDto CheckTransferType(string bankNumber)
@@ -172,7 +329,7 @@ namespace BSRBankingDataAccess
             var result = new ActionTypeResultDto();
             try
             {
-                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BankConnString"].ConnectionString))
+                using (var connection = DbContext.SimpleDbConnection())
                 {
 
                     var query = "select BankAccountId from BankAccounts where BankAccountNumber = @bankNumb";
@@ -185,6 +342,7 @@ namespace BSRBankingDataAccess
                     {
                         result.SetSuccess(BSRBankingDataContract.Enums.eActionType.ExternalTranser);
                     }
+                    connection.Close();
                     return result;
                 }
             }
@@ -200,7 +358,7 @@ namespace BSRBankingDataAccess
         {
             var result = new StringResultDto();
             var givenBankId = externalBankNumber.Substring(2, 8);
-            using (var reader = new StreamReader(@"..\..\CSVBANK.csv"))
+            using (var reader = new StreamReader(@"D:\Dokumenty\Pojects\BSRBanking\CSVBANK.csv"))
             {
                 var list = new List<ExternalAccountDto>();
                 while (!reader.EndOfStream)
@@ -218,14 +376,14 @@ namespace BSRBankingDataAccess
                 if(list.Any(x=>x.BankId == givenBankId))
                 {
                     var url = list.FirstOrDefault(x=>x.BankId == givenBankId);
-                    result.SetSuccess(url.Url);
+                    result.SetSuccess(url.Url+externalBankNumber+"/history");
                 }
                 else
                 {
                     result.SetErrors("Account number not found");
                 }
             }
-
+            
             return result;
         }
 

@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -127,7 +128,14 @@ namespace BSRBanking.ViewModel
             }
             set
             {
-                _amount = value;
+                try
+                {
+                    _amount = value;
+                }catch(Exception ex)
+                {
+                    ErrorMessage = ex.Message;
+                    ErrorLabel = Visibility.Visible;
+                }
             }
         }
 
@@ -145,21 +153,30 @@ namespace BSRBanking.ViewModel
 
         private void InternalTransfer()
         {
-            var action = new AccountActionModel(eActionType.InternalTransfer, DestinationOwnerName, DestinationIdNumber, OwnerName, BankIdNumber,Title, Amount);
-            var actionDto = Mapper.Map<AccountActionDto>(action);
-            ErrorLabel = Visibility.Hidden;
-            using(var client = new Service.AccountManagerClient())
+            var s = Computing.ComputeChecksum("001168340011225033158321");
+            try
             {
-                var result = client.Transfer(actionDto);
-                if (result.Success())
+                var action = new AccountActionModel(eActionType.InternalTransfer, DestinationOwnerName, DestinationIdNumber, OwnerName, BankIdNumber, Title, Amount);
+                var actionDto = Mapper.Map<AccountActionDto>(action);
+                ErrorLabel = Visibility.Hidden;
+                using (var client = new Service.AccountManagerClient())
                 {
-                    _navigationService.NavigateTo("BankPage","");
+                    var result = client.Transfer(actionDto);
+                    if (result.Success())
+                    {
+                        _navigationService.NavigateTo("BankPage", "");
+                    }
+                    else
+                    {
+                        ErrorMessage = result.Result.ExceptionMessage;
+                        ErrorLabel = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ErrorMessage = result.Result.ExceptionMessage;
-                    ErrorLabel = Visibility.Visible;
-                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+                ErrorLabel = Visibility.Visible;
             }
         }
 

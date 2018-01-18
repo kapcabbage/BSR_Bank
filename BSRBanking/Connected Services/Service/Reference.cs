@@ -32,6 +32,24 @@ namespace BSRBanking.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Transfer", ReplyAction="http://tempuri.org/IAccountManager/TransferResponse")]
         System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> TransferAsync(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/External", ReplyAction="http://tempuri.org/IAccountManager/ExternalResponse")]
+        BSRBankingDataContract.Base.BoolResultDto External(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/External", ReplyAction="http://tempuri.org/IAccountManager/ExternalResponse")]
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> ExternalAsync(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Withdraw", ReplyAction="http://tempuri.org/IAccountManager/WithdrawResponse")]
+        BSRBankingDataContract.Base.BoolResultDto Withdraw(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Withdraw", ReplyAction="http://tempuri.org/IAccountManager/WithdrawResponse")]
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> WithdrawAsync(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Deposit", ReplyAction="http://tempuri.org/IAccountManager/DepositResponse")]
+        BSRBankingDataContract.Base.BoolResultDto Deposit(BSRBankingDataContract.Dtos.AccountActionDto action);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAccountManager/Deposit", ReplyAction="http://tempuri.org/IAccountManager/DepositResponse")]
+        System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> DepositAsync(BSRBankingDataContract.Dtos.AccountActionDto action);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +101,30 @@ namespace BSRBanking.Service {
         
         public System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> TransferAsync(BSRBankingDataContract.Dtos.AccountActionDto action) {
             return base.Channel.TransferAsync(action);
+        }
+        
+        public BSRBankingDataContract.Base.BoolResultDto External(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.External(action);
+        }
+        
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> ExternalAsync(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.ExternalAsync(action);
+        }
+        
+        public BSRBankingDataContract.Base.BoolResultDto Withdraw(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.Withdraw(action);
+        }
+        
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> WithdrawAsync(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.WithdrawAsync(action);
+        }
+        
+        public BSRBankingDataContract.Base.BoolResultDto Deposit(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.Deposit(action);
+        }
+        
+        public System.Threading.Tasks.Task<BSRBankingDataContract.Base.BoolResultDto> DepositAsync(BSRBankingDataContract.Dtos.AccountActionDto action) {
+            return base.Channel.DepositAsync(action);
         }
     }
     

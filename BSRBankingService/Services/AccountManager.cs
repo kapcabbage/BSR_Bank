@@ -14,6 +14,32 @@ namespace BSRBankingService.Services
 {
     public partial class Service : IAccountManager
     {
+        public BoolResultDto Deposit(AccountActionDto action)
+        {
+            var result = new BoolResultDto();
+            try
+            {
+                if (Validation.ValidateNrb(action.DestinationBankNumber))
+                {
+                    action.ActionType = BSRBankingDataContract.Enums.eActionType.Deposit;
+                    var transferResult = BankAccount.Deposit(action);
+                    if (transferResult.Success())
+                    {
+                        result = transferResult;
+                    }
+                }
+                else
+                {
+                    result.SetErrors("Account number is invalid");
+                }
+            }
+            catch (Exception ex)
+            {
+                result.SetErrors(ex);
+            }
+            return result;
+        }
+
         public BoolResultDto External(AccountActionDto action)
         {
             var result = new BoolResultDto();
@@ -93,9 +119,13 @@ namespace BSRBankingService.Services
                     {
                         accountAction.ActionType = eActionType.InternalTransfer;
                         var transferResult = BankAccount.InternalTransfer(accountAction);
-                        if (transferResult)
+                        if (transferResult.Success())
                         {
-                            result.SetSuccess(transferResult);
+                            result.SetSuccess(transferResult.Data);
+                        }
+                        else
+                        {
+                            result.SetErrors(transferResult.Result.ExceptionMessage);
                         }
                     }
                     else if (transferType.Success() && transferType.Data == eActionType.ExternalTranser)
@@ -119,6 +149,32 @@ namespace BSRBankingService.Services
                         {
                             result.SetErrors(externalValidation.Result.ExceptionMessage);
                         }
+                    }
+                }
+                else
+                {
+                    result.SetErrors("Account number is invalid");
+                }
+            }
+            catch (Exception ex)
+            {
+                result.SetErrors(ex);
+            }
+            return result;
+        }
+
+        public BoolResultDto Withdraw(AccountActionDto action)
+        {
+            var result = new BoolResultDto();
+            try
+            {
+                if (Validation.ValidateNrb(action.DestinationBankNumber))
+                {
+                    action.ActionType = BSRBankingDataContract.Enums.eActionType.Withdrawal;
+                    var transferResult = BankAccount.Withdraw(action);
+                    if (transferResult.Success())
+                    {
+                        result = transferResult;
                     }
                 }
                 else

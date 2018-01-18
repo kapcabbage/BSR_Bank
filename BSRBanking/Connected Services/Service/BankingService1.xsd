@@ -44,6 +44,48 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="External">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" minOccurs="0" name="action" nillable="true" type="q5:AccountActionDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExternalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="ExternalResult" nillable="true" type="q6:BoolResultDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Withdraw">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" minOccurs="0" name="action" nillable="true" type="q7:AccountActionDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WithdrawResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="WithdrawResult" nillable="true" type="q8:BoolResultDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Deposit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Dtos" minOccurs="0" name="action" nillable="true" type="q9:AccountActionDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DepositResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="DepositResult" nillable="true" type="q10:BoolResultDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AuthenticateUser">
     <xs:complexType>
       <xs:sequence>
@@ -55,7 +97,7 @@
   <xs:element name="AuthenticateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="AuthenticateUserResult" nillable="true" type="q5:UserResultDto" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BSRBankingDataContract.Base" minOccurs="0" name="AuthenticateUserResult" nillable="true" type="q11:UserResultDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
